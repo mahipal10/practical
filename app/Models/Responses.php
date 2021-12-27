@@ -16,8 +16,9 @@ class Responses extends Eloquent  {
      * Function for bind Batch model   
      *
      */         
+    
     public function feedbackQuestionInfo(){
-        return $this->belongsTo('App\Models\Question','question_id','id')->where('type','slider')->select(['id','question','type']);
+        return $this->hasMany('App\Models\FeedbackQuestion','question_id','feedback_questions_id')->select(['id','question_id','feedback_id']);
     }
 
 

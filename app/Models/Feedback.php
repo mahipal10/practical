@@ -50,17 +50,12 @@ class Feedback extends Eloquent  {
      * Function for bind Batch model   
      *
      */         
-    /*public function avgFeedbackInfos(){
-        return $this->hasMany('App\Models\Responses','feedback_id','id')->select(['id','feedback_id','feedback_questions_id']);
-    }*/
-
-    /**
-     * Function for bind Batch model   
-     *
-     */         
-    public function getFeedbackQuestion(){
-        return $this->hasMany('App\Models\FeedbackQuestion','feedback_id','id')->select(['id','feedback_id','question_id']);
+    public function ResponsesInfo(){
+        return $this->hasMany('App\Models\Responses','feedback_id','id')->select(['id','feedback_id','feedback_questions_id','answer']);
+        
     }
+
+    
 
     
         

@@ -22,15 +22,12 @@ class HomeController extends Controller {
 	public function index() {
 		
 		$DB 		=	Feedback::Query();
-		$DB 		= 	$DB->with(['degreeInfo','batchInfo','termInfo','subjectInfo','getFeedbackQuestion.sliderQuestionOnly','getFeedbackQuestion.getResponseQuestionOnly']);
+		$DB 		= 	$DB->with(['degreeInfo','batchInfo','termInfo','subjectInfo','ResponsesInfo.feedbackQuestionInfo.sliderQuestionOnly']);
 		$getRecord 	= 	$DB->get()->toArray();
-
-		//$getRecord = array();
 
 		return View::make('index',compact('getRecord'));
 	}
 
 	
-
 }
 // end HomeController class

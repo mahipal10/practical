@@ -21,13 +21,8 @@ class FeedbackQuestion extends Eloquent  {
     }
 
 
-    /**
-     * Function for bind Batch model   
-     *
-     */         
-    public function getResponseQuestionOnly(){
-        return $this->hasMany('App\Models\Responses','feedback_questions_id','id')->select(['id','feedback_questions_id','answer','feedback_id']);
-    }
+    
+    
 
 
  

@@ -48,37 +48,32 @@ $(document).ready(function() {
         				$totalStudent = 0;
         				$feedbackAvg = 0;
 
-        				if(!empty($result['get_feedback_question'])) {
+        				if(!empty($result['responses_info'])) {
 
+                            foreach($result['responses_info'] as $rowList) {
 
-        					foreach($result['get_feedback_question'] as $rowList) {
-        						if(
-        							($rowList['feedback_id'] == $result['id']) 
-        							&& ($rowList['question_id'] == $rowList['slider_question_only']['id'])  
-        						) {
+    						    if(!empty($rowList['feedback_question_info'])) {
+    								
+    								foreach($rowList['feedback_question_info'] as $feedback_list) {
 
-        							if(!empty($rowList['get_response_question_only'])) {
-        								
-        								foreach($rowList['get_response_question_only'] as $feedback_list) {
+    									if(
+    										($feedback_list['feedback_id'] == $result['id'])
+                                            && ($feedback_list['feedback_id'] == $rowList['feedback_id'])
+                                            && isset($feedback_list['slider_question_only']['id']) 
+    										&& isset($rowList['answer'])
+                                        )  {
+    										
+    										$totalAnswerCount = $totalAnswerCount + $rowList['answer']; 
 
-        									if(
-        										($feedback_list['feedback_id'] == $result['id'])
-        										&& isset($feedback_list['answer'])
-        									)  {
-        										
-        										$totalAnswerCount = $totalAnswerCount + $feedback_list['answer']; 
+    										$totalStudent++;
 
-        										$totalStudent++;
+    										
+    									}	
 
-        										
-        									}	
+    								}
 
-        								}
+    							}
 
-        							}
-
-
-        						}
         					}
 
         				}
@@ -100,7 +95,7 @@ $(document).ready(function() {
 		                <td>{{ isset($result['batch_info']['name']) ? $result['batch_info']['name'] : '' }}</td>
 		                <td>{{ isset($result['term_info']['name']) ? $result['term_info']['name'] : '' }}</td>
 		                <td>{{ isset($result['subject_info']['name']) ? $result['subject_info']['name'] : '' }}</td>
-		                <td>{{ round($feedbackAvg,2)  }}</td>
+		                <td>{{ round($feedbackAvg,4)  }}</td>
             		</tr>	
 
         		@endforeach
